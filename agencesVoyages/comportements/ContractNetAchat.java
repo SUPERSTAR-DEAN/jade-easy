@@ -18,6 +18,15 @@ import java.util.*;
 /**
  * Journey Buyer Behaviour by contract net
  *
+ * 【旅客的"买行程"行为】Contract-Net 发起方，由 TravellerAgent 挂载。
+ * 对应 [voyagesEnVille/comportements/ContractNetAchat](../../voyagesEnVille/comportements/ContractNetAchat.java)（已加详细注释）。
+ *
+ * 流程：
+ *   - 构造 CFP（含起点/终点/出发时间/偏好），发给所有 travel 服务智能体
+ *   - 收到各旅行社的 PROPOSE（带目录）→ handlePropose / handleAllResponses
+ *   - 在所有目录里搜索"起点→终点"的所有方案，组合成 ComposedJourney
+ *   - 按偏好（成本/时间/CO2）选最优，向相关旅行社发 ACCEPT_PROPOSAL
+ *
  * @author revised by Emmanuel ADAM
  * @version 191017
  */

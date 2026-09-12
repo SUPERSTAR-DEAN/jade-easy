@@ -18,6 +18,12 @@ import java.util.stream.IntStream;
 /**
  * classe d'un agent qui soumet un appel au vote a d'autres agents  par le protocole ContractNet
  *
+ * 【Condorcet 投票站的旧版本】与 [PollingStationAgent](PollingStationAgent.java) 实现同一功能，
+ * 但**缺少"平票时在子集上重跑 Condorcet"这一步**——只做一次胜场数统计 + 分数平票判断。
+ *
+ * 保留这个类是为了对比"朴素 Condorcet"与"完整 Condorcet"在平票处理上的差异。
+ * 详见新版 [PollingStationAgent](PollingStationAgent.java) 的完整注释。
+ *
  * @author eadam
  */
 public class PollingStationAgentOld extends AgentWindowed {

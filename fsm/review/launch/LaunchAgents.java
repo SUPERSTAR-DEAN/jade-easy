@@ -7,7 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
-
+/** 【启动器】FSM 审稿流程：1 作者 + 1 期刊 + 3 审稿人（ra/rb/rc） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

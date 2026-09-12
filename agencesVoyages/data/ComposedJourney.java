@@ -11,6 +11,9 @@ import java.util.List;
  * of journey from a departure to an arrival. the arrival date is the arrival
  * date of the last journey, the cost is the sum of the cost, the confort is the
  * average of the confort..
+ *
+ * 【组合行程类（综合案例版）】同 [voyagesEnVille/data/ComposedJourney](../../voyagesEnVille/data/ComposedJourney.java)。
+ * 由多段 Journey 拼接，总成本=各段之和，舒适度=各段平均。
  */
 @SuppressWarnings("serial")
 public class ComposedJourney implements Serializable {

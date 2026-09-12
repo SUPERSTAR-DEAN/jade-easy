@@ -7,6 +7,8 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】LLM 智能体：1 LLM 智能体（blablaAgent）+ 1 天气智能体（meteoAgent）
+ *  前置条件：本机需装 Ollama 并拉取至少一个模型 */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

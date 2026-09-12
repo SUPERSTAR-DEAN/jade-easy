@@ -11,6 +11,12 @@ import java.awt.event.WindowEvent;
 /**
  * Journey resarch Gui, communication with TravellerAgent throw GuiEvent
  *
+ * 【旅客 GUI】让用户选择起点/终点/出发时间/选择标准（成本/时间/CO2），
+ * 点击按钮后通过 GuiEvent 通知 TravellerAgent 发起招标。
+ *
+ * 这是 [helloWorldService/gui/SimpleGui4Agent](../../helloWorldService/gui/SimpleGui4Agent.java) 的复杂版，
+ * 多了下拉框、滑块等控件，但**事件传递模式相同**：用户操作 → GuiEvent → onGuiEvent。
+ *
  * @author modif. Emmanuel Adam - LAMIH
  */
 @SuppressWarnings("serial")

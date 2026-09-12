@@ -26,6 +26,14 @@ import java.util.stream.Stream;
 /**
  * Journey searcher
  *
+ * 【旅客智能体（综合案例版）】这是 [voyagesEnVille/agents/TravellerAgent](../../voyagesEnVille/agents/TravellerAgent.java)
+ * 的扩展版，多了**订阅警报**和**多智能体协作**的能力。
+ *
+ * 职责：
+ *   - 通过黄页订阅"travel"服务的变更（DFSubscriber）
+ *   - 收到用户请求后向所有旅行社发 CFP（ContractNetAchat 行为）
+ *   - 收到警报时重新规划行程
+ *
  * @author Emmanuel ADAM
  */
 public class TravellerAgent extends GuiAgent {

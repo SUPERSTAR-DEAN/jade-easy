@@ -8,6 +8,9 @@ import java.util.Objects;
  * departure and arrival point, departure and arrival date, duration, means
  * (car, bus, ..), cost, co2, confort, provider
  *
+ * 【行程类（综合案例版）】同 [voyagesEnVille/data/Journey](../../voyagesEnVille/data/Journey.java)。
+ * 一段行程：起点→终点，含时间、方式、成本、CO2、舒适度、提供商。
+ *
  * @author emmanueladam
  */
 @SuppressWarnings("serial")

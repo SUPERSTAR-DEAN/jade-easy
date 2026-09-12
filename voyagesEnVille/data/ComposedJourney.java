@@ -11,6 +11,14 @@ import java.util.List;
  * of journey from a departure to an arrival. the arrival date is the arrival
  * date of the last journey, the cost is the sum of the cost, the confort is the
  * average of the confort..
+ *
+ * 【组合行程类】由多段 Journey 拼接而成（如 a→b→c 要先坐公交再坐火车）。
+ * - 出发时间 = 第一段的出发时间
+ * - 到达时间 = 最后一段的到达时间
+ * - 总成本 = 各段成本之和
+ * - 综合舒适度 = 各段舒适度的平均
+ *
+ * 这是"多模态行程规划"的核心数据结构。
  */
 @SuppressWarnings("serial")
 public class ComposedJourney implements Serializable {

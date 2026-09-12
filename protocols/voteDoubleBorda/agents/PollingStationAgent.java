@@ -17,6 +17,14 @@ import java.util.*;
 /**
  * classe for the polling station agent that launch a call for vote via  ContractNet
  *
+ * 【双重 Borda 投票站】用 Contract-Net 协议发起 Borda 投票，
+ * 与 [bordaCount/PollingStationAgent](../bordaCount/agents/PollingStationAgent.java) 的差异是**平票处理**：
+ *   - 普通 Borda：平票时重新发起**完整**投票
+ *   - 双重 Borda：平票时**只在平票选项之间**再做一次 Borda（把其他选项排除），
+ *                  如果还平票才随机抽取
+ *
+ * 关键方法：`getRestoElected()` 是 Borda 计票的核心——按排名累加分，第 1 名 maxPoints 分、递减。
+ *
  * @author eadam
  */
 public class PollingStationAgent extends AgentWindowed {
@@ -33,12 +41,15 @@ public class PollingStationAgent extends AgentWindowed {
 
     /**
      * add a ContractNet protocol to launch a vote
+     *
+     * 【创建投票协议行为】
      */
     private void createVote(String id, String objet) {
 
         println("_/ \\".repeat(20));
         println("/ \\_".repeat(20));
         println("-> start a vote for these options " + objet);
+        // 【初始化计票表】每个候选项一个计数器
         HashMap<String, Integer> votes = new HashMap<>();
         HashMap<String, Integer> lastPosition = new HashMap<>();
         for (Restaurant r : Restaurant.values()) {
@@ -87,9 +98,12 @@ public class PollingStationAgent extends AgentWindowed {
                     mesRetours.add(ret);
                 });
 
+                // 【第一次 Borda 计数】maxPoints = 候选项数量
                 var selectedResto = getRestoElected(leursVotes, Restaurant.values().length);
 
                 //gestion des ex-aequo : on recompte sans prendre en compte les autres restos
+                // 【第二次 Borda 计数（双重 Borda 的关键）】
+                //   只在平票选项之间重新计数，其他选项从 votes 里清掉
                 if (selectedResto.size() > 1) {
                     println("-".repeat(30));
                     println("we try to separate the ex-aequo : " + selectedResto);

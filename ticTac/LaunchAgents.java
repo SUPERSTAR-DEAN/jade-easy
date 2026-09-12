@@ -11,6 +11,8 @@ import java.util.Properties;
 /**
  * class that launch the jade platform and 2 agents (deminer and sender).
  *
+ * 【启动器】消息过滤演示：1 发送者（sender，发 CLOCK/BOOM）+ 1 接收者（deminer）
+ *
  * @author emmanueladam
  */
 public class LaunchAgents extends Agent {

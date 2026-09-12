@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】带窗口的智能体：1 发送者（a）+ 3 接收者（b/c/d） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

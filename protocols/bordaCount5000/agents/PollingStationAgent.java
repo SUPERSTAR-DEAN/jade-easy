@@ -18,6 +18,10 @@ import java.util.*;
 /**
  * class of an agent that proposes a call for proposal using the ContractNet protocol
  *
+ * 【5000 智能体版的投票站】与 [bordaCount/PollingStationAgent](../bordaCount/agents/PollingStationAgent.java)
+ * 逻辑相同，差别在用 5000 个 ParticipantAgent（无窗口）而非 5 个（有窗口）。
+ * 详细注释见 bordaCount 版本。
+ *
  * @author eadam
  */
 public class PollingStationAgent extends AgentWindowed {

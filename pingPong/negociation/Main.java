@@ -19,6 +19,9 @@ import static java.lang.System.out;
  * Agent class to allow exchange of messages between an agent named ping, that initiates the 'dialog', and an agent
  * named 'pong'
  *
+ * 【启动器】讨价还价：1 买家（acheteur）+ 1 卖家（vendeur）
+ * 对应 [protocols/negociation/Negociateur](../../protocols/negociation/Negociateur.java) 的简化版（分了两个类）。
+ *
  * @author emmanueladam
  */
 public class Main {

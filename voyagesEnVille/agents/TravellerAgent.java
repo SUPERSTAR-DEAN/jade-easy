@@ -21,6 +21,10 @@ import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Stream;
 
+/*
+ * 【旅行者智能体·买方】这个类代表客户/旅行者，在多智能体系统中扮演“买方”角色：
+ * 它向多家旅行社发起招标（CFP），收集各家的旅行目录，按自己的偏好（成本/时长/舒适度等）选择并购买行程。
+ */
 /**
  * Journey searcher
  *
@@ -69,6 +73,7 @@ public class TravellerAgent extends GuiAgent {
     /**
      * Initialisation de l'agent
      */
+    // 【setup 方法】启动时创建窗口、订阅黄页以发现旅行社、监听交通广播
     @Override
     protected void setup() {
         this.window = new TravellerGui(this);
@@ -92,11 +97,13 @@ public class TravellerAgent extends GuiAgent {
     /**
      * ecoute des evenement de type enregistrement en tant qu'agence aupres des pages jaunes
      */
+    // 【detectAgences 方法】订阅黄页服务：当有旅行社注册/注销时，自动更新本地的“卖家列表”
     private void detectAgences() {
         var model = AgentServicesTools.createAgentDescription("travel agency", "seller");
         vendeurs = new ArrayList<>();
 
-        //souscription au service des pages jaunes pour recevoir une alerte en cas mouvement sur le service travel agency'seller
+        //souscription au service des pages jaunes ... （订阅黄页服务：监听 "travel agency"/"seller" 服务的动态变化）
+        // DFSubscriber 会在有旅行社注册（onRegister）或注销（onDeregister）时回调对应方法
         addBehaviour(new DFSubscriber(this, model) {
             @Override
             public void onRegister(DFAgentDescription dfd) {
@@ -121,10 +128,12 @@ public class TravellerAgent extends GuiAgent {
      * @param departure  desired departure time (in hhmm)
      * @param preference preference for the choice of the journey (cost, confort, duration, duration-cost)
      * */
+    // 【computeComposedJourney 方法】在收到的目录里找出从起点到终点的组合行程，并按用户偏好排序后选出最优的一个
     public void computeComposedJourney(final String from, final String to, final int departure,
                                        final String preference) {
         final List<ComposedJourney> journeys = new ArrayList<>();
 
+        // 递归查找所有“直接或中转”的可行行程（允许换乘）
         final boolean result = catalogs.findIndirectJourney(from, to, departure, 60, new ArrayList<>(),
                 new ArrayList<>(), journeys);
 
@@ -132,8 +141,9 @@ public class TravellerAgent extends GuiAgent {
             println("no journey found !!!");
         }
         if (result) {
-            //oter les voyages demarrant trop tard
+            //oter les voyages demarrant trop tard（剔除“比期望出发时间晚太久”的行程，delay=90 分钟）
             journeys.removeIf(j -> j.getJourneys().getFirst().getDepartureDate() - departure > delay);
+            // 按用户偏好排序：时长最短 / 舒适度最高 / 成本最低 / 时长+成本综合
             switch (preference) {
                 case "duration" -> {
                     journeys.sort(Comparator.comparingDouble(ComposedJourney::getDuration));
@@ -142,6 +152,7 @@ public class TravellerAgent extends GuiAgent {
                 case "cost" -> journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
                 case "duration-cost" ->
                 //        journeys.sort(Comparator.comparingDouble(ComposedJourney::getCost));
+                // 综合“时长差异 + 成本差异”，取最小的排前面（差异越小越好）
                 journeys.sort((j1, j2) -> {
                     var difDuration = j1.getDuration() - j2.getDuration() / Math.max(j2.getDuration(),j1.getDuration());
                     var difCost = j1.getCost() - j2.getCost() / Math.max(j2.getCost(),j1.getCost());
@@ -156,6 +167,7 @@ public class TravellerAgent extends GuiAgent {
     /**
      * get event from the GUI
      */
+    // 【onGuiEvent 方法】接收 GUI 事件：退出，或按用户输入发起一次 ContractNet 招标（购买行程）
     @Override
     protected void onGuiEvent(final GuiEvent eventFromGui) {
         if (eventFromGui.getType() == TravellerAgent.EXIT) {
@@ -169,6 +181,7 @@ public class TravellerAgent extends GuiAgent {
     }
 
     // 'Nettoyage' de l'agent
+    // 【takeDown 方法】关闭窗口、离开平台
     @Override
     protected void takeDown() {
         if (window != null) {

@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】创建 9 个 HelloAgent（sim1~sim9），演示黄页服务发现 */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

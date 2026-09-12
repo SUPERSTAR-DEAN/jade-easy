@@ -7,6 +7,8 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】广播演示：1 广播者（a）+ 99 收听者（sim_1~99）
+ *  注意：必须加载 TopicManagementService，否则 generateTopicAID 会失败 */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

@@ -14,6 +14,12 @@ import java.util.logging.Logger;
 /**
  * launch the simulation of travelers and travel agencies
  *
+ * 【启动器】城市出行规划综合案例：
+ *   1 旅客（client1）+ 4 旅行社（自行车/汽车/公交/电车，各自读 CSV）+ 1 警报智能体
+ *   旅行社创建时传入 CSV 路径作为参数，AgenceAgent 在 setup 里读取
+ *   必须加载 TopicManagementService 才能使用广播警报
+ *   日志输出到 ./simuAgences.xml
+ *
  * @author emmanueladam
  */
 public class LaunchSimu {

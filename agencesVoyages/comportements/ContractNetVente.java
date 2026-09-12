@@ -19,6 +19,14 @@ import java.util.ArrayList;
 /**
  * Journeys Seller Behaviour by contract net
  *
+ * 【旅行社的"卖行程"行为】Contract-Net 响应方，由 AgenceAgent 挂载。
+ * 对应 [voyagesEnVille/comportements/ContractNetVente](../../voyagesEnVille/comportements/ContractNetVente.java)（已加详细注释）。
+ *
+ * 流程：
+ *   - 收到 CFP → 把整个 catalog 序列化进 PROPOSE 消息
+ *   - 收到 ACCEPT_PROPOSAL → 反序列化旅客选中的行程列表，扣减座位
+ *   - 收到 REJECT_PROPOSAL → 打印
+ *
  * @author revised by Emmanuel ADAM
  * @version 191017
  */

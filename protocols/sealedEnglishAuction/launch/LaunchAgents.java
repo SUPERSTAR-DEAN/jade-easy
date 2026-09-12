@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】密封英式拍卖：1 拍卖方（auctioneer）+ 5 竞拍者（bidder_0~4） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

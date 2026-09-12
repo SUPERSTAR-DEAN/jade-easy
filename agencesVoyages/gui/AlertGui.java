@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 /**
  * Journey alert Gui, communication with AlertAgent throw GuiEvent
  *
+ * 【警报 GUI（综合案例版）】让用户输入"起点-终点"标识某路段出问题，
+ * 点击按钮后通知 AlertAgent 广播警报。
+ * 对应 [voyagesEnVille/gui/AlertGui](../../voyagesEnVille/gui/AlertGui.java)。
+ *
  * @author modif. Emmanuel Adam - LAMIH
  */
 @SuppressWarnings("serial")

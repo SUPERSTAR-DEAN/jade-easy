@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】FIPA-Request 协议：1 发送方（a）+ 10 响应方（b~k，用 ASCII 码生成名字） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

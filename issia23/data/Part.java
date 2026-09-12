@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 【零件类】循环经济场景中维修所需的零件。
+ * 实现 Serializable 以便通过 ACL 消息序列化传输。
+ * 字段：name（名称）、serialNumber（编号）、difficulty（维修难度）、price（价格）
+ */
 public class  Part implements Serializable {
     String name;
     int serialNumber;

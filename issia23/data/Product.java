@@ -6,12 +6,17 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-/**class representing a product
+/**
+ * class representing a product
  * - name
  * - specification
  * - price
  * This class create the list of products used un the simulation;
  * for each specification, new products are created with a variation of price regarding the standard price included in the specification
+ *
+ * 【产品类】循环经济场景中用户持有的产品（咖啡机、洗衣机等）。
+ * 字段：name（名称）、type（产品类型，含规格数/标准价）、price（实际价格，相对标准价有浮动）
+ * 实现 Serializable 以便通过 ACL 消息传输。
  * */
 public class Product implements Serializable {
     /**name of the product*/

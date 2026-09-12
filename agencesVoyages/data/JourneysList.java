@@ -12,6 +12,9 @@ import java.util.function.Predicate;
  * contains function to search all the possible ways between two point start and
  * stop
  *
+ * 【行程目录类（综合案例版）】同 [voyagesEnVille/data/JourneysList](../../voyagesEnVille/data/JourneysList.java)。
+ * 旅行社提供的所有行程 + 路径搜索算法。
+ *
  * @author emmanueladam
  * @version 1.1
  */

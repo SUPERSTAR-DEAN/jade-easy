@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】Borda 投票：1 投票站（bureau）+ 50 投票者（votant_0~49） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // preparer les arguments pout le conteneur JADE

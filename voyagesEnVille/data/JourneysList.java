@@ -9,6 +9,12 @@ import java.util.function.Predicate;
  * contains function to search all the possible ways between two point start and
  * stop
  *
+ * 【行程目录类】一个旅行社提供的所有行程，且包含**路径搜索算法**：
+ *   - getJourneysFrom(start)：从某起点出发的所有行程
+ *   - findWays(start, stop)：搜索从 start 到 stop 的所有可能路径（深度优先）
+ *
+ * 这是 [ContractNetVente](../comportements/ContractNetVente.java) 里序列化进 PROPOSE 消息的对象。
+ *
  * @author emmanueladam
  * @version 1.1
  */

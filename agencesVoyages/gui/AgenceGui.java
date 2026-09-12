@@ -11,6 +11,9 @@ import java.awt.event.WindowEvent;
 /**
  * Agence Gui, communication with AgenceAgent throw GuiEvent
  *
+ * 【旅行社 GUI（综合案例版）】显示本旅行社的行程目录和成交情况。
+ * 对应 [voyagesEnVille/gui/AgenceGui](../../voyagesEnVille/gui/AgenceGui.java)。
+ *
  * @author Emmanuel Adam - LAMIH
  */
 public class AgenceGui extends JFrame {

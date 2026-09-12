@@ -18,6 +18,14 @@ import java.util.List;
 /**
  * agent that waits for a message from a CFP protocol, prepares the response, and returns it
  * use AgentWindowed to display the messages in a window if few agents are used, otherwise use Agent to avoid too many windows (nb agents between 100 and 10000...)
+ *
+ * 【5000 智能体版的投票参与者】与 [bordaCount/ParticipantAgent](../bordaCount/agents/ParticipantAgent.java) 逻辑相同，
+ * 差别在继承 **Agent** 而非 AgentWindowed——避免 5000 个窗口爆炸。
+ *
+ * 【性能对比要点】
+ *   - 小规模（< 100）：用 AgentWindowed，每个智能体一个窗口，便于观察
+ *   - 大规模（100~10000）：用 Agent，只在控制台输出，节省资源
+ *
  * @author eadam
  */
 public class ParticipantAgent extends Agent  { // extends Agent {

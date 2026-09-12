@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】Condorcet 投票：1 投票站（pollingStation）+ 5 投票者（voter_0~4） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // preparer les arguments pout le conteneur JADE

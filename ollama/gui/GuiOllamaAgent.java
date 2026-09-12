@@ -12,6 +12,11 @@ import java.awt.event.ActionListener;
  * a simple window for a Jade GuiAgent with two texts areas to display
  * informations
  *
+ * 【LLM 智能体的 GUI】用户在下方输入框输入问题，点击按钮后通过 GuiEvent 通知 AgentLLM。
+ *
+ * 与 [helloWorldService/gui/SimpleGui4Agent](../../helloWorldService/gui/SimpleGui4Agent.java) 同模式：
+ * 用户操作 → GuiEvent → onGuiEvent。差别在事件码：SENDQUERY（发查询）、QUITCODE（退出）。
+ *
  * @author emmanuel adam
  * @version 1
  */

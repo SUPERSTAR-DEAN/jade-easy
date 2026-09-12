@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -la \"$HOME/.vscode/extensions/\" 2>/dev/null | grep -iE \"java|redhat|vscjava\" | head -20; echo \"---项目内vscode配置---\"; find \"D:/code_JADE/jade-easy\" -maxdepth 2 -name \".vscode\" -type d 2>/dev/null; ls -la \"D:/code_JADE/jade-easy/.vscode/\" 2>/dev/null)",
+      "Read(//c/Users/yang8/.vscode/extensions/**)"
+    ]
+  }
+}

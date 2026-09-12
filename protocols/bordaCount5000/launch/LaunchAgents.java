@@ -7,6 +7,8 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】大规模 Borda 投票：1 投票站 + 5000 投票者
+ *  注意：智能体数量 >100 时需调大 jade_domain_df_maxresult，否则黄页查询会截断 */
 public class LaunchAgents {
     public static void main(String[] args) {
         // preparer les arguments pout le conteneur JADE

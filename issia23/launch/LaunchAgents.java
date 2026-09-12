@@ -8,6 +8,8 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】循环经济场景：2 用户 + 4 维修咖啡机 + 2 零件店 + 2 分销商
+ *  注意：先调用 Product.getListProducts() 初始化产品目录（静态块加载） */
 public class LaunchAgents {
     public static void main(String[] args) {
         //creer la liste des produits

@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.*;
 
 
+/*
+ * 【买方行为（合同网·发起方）】这个类继承 ContractNetInitiator，代表“买方”发起的合同网协商：
+ * 它把招标（CFP）发给所有旅行社，收集回复，选择最优行程，并向中标者发送“接受”（ACCEPT_PROPOSAL）。
+ */
 /**
  * Journey Buyer Behaviour by contract net
  *
@@ -48,6 +52,7 @@ public class ContractNetAchat extends ContractNetInitiator {
      * @param _departure  date of departure
      * @param _preference criteria (cost, duration, ...)
      */
+    // 【构造方法】初始化招标：设置合同网协议、指定 1 秒内回复、把所有旅行社加为接收者
     public ContractNetAchat(Agent agent, ACLMessage msg, final String _from, final String _to, final int _departure, final String _preference) {
         super(agent, msg);
         from = _from;
@@ -56,9 +61,9 @@ public class ContractNetAchat extends ContractNetInitiator {
         preference = _preference;
         monAgent = (TravellerAgent) agent;
         window = monAgent.getWindow();
-        // définition du prococole
+        // définition du prococole（指定协议为 FIPA 合同网）
         msg.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
-        // Réponse plus tard dans 1 sec
+        // Réponse plus tard dans 1 sec（要求对方在 1 秒内回复）
         msg.setReplyByDate(new Date(System.currentTimeMillis() + 1000));
         List<AID> vendeurs = monAgent.getVendeurs();
         vendeurs.forEach(msg::addReceiver);
@@ -72,6 +77,7 @@ public class ContractNetAchat extends ContractNetInitiator {
      *
      * @param refuse refus recu
      */
+    // 【handleRefuse 方法】某个卖家拒绝参与时被调用
     @Override
     protected void handleRefuse(ACLMessage refuse) {
         window.println("Agent " + refuse.getSender().getLocalName() + " refuse");
@@ -82,6 +88,7 @@ public class ContractNetAchat extends ContractNetInitiator {
      *
      * @param failure erreur recue
      */
+    // 【handleFailure 方法】某个卖家出错（无法继续交易）时被调用
     @Override
     protected void handleFailure(ACLMessage failure) {
         if (failure.getSender().equals(myAgent.getAMS())) {
@@ -100,16 +107,18 @@ public class ContractNetAchat extends ContractNetInitiator {
      * @param acceptances vecteur des messages à transmettre en retour aux réponses reçues
      * @see ContractNetInitiator#handleAllResponses(List, List)
      */
+    // 【handleAllResponses 方法】合同网核心：收集所有卖家的报价，选出最优行程，向中标者发送接受消息
     @Override
     protected void handleAllResponses(List<ACLMessage> responses, List<ACLMessage> acceptances) {
-        //catalog of journeys built from answers
+        //catalog of journeys built from answers（汇总所有卖家发来的行程目录）
         var catalogs = new JourneysList();
-        //map <name to the agent (agence), Msg built to answer to it>
+        //map <name to the agent (agence), Msg built to answer to it>（卖家名 -> 准备回给它的消息）
         Map<String, ACLMessage> reponses = new HashMap<>();
         for (ACLMessage ans : responses) {
             if (ans.getPerformative() == ACLMessage.PROPOSE) {
                 JourneysList receivedCatalog = null;
                 try {
+                    // 卖家把整个目录作为对象内容发送过来，这里读出来
                     receivedCatalog = (JourneysList) ans.getContentObject();
                 } catch (UnreadableException e) {
                     e.printStackTrace();
@@ -121,6 +130,7 @@ public class ContractNetAchat extends ContractNetInitiator {
                 }
 
             }
+            // 先默认拒绝每个卖家，之后再对中标者改为接受
             var reply = ans.createReply();
             reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
             acceptances.add(reply);
@@ -130,8 +140,9 @@ public class ContractNetAchat extends ContractNetInitiator {
         monAgent.println("j'ai bien recu les calalogues : ");
         monAgent.println(catalogs.toString());
         monAgent.println("je fais mon choix...");
+        // 让旅行者按偏好（成本/时长/舒适度）选出最优的组合行程
         monAgent.computeComposedJourney(from, to, departure, preference);
-        //map <name to the agent (agence), list of journeys to buy to it>
+        //map <name to the agent (agence), list of journeys to buy to it>（按卖家分组，统计需要向每家买哪些行程）
         Map<String, ArrayList<Journey>> voyagesAAcheter = new HashMap<>();
         var journey = monAgent.getMyJourney();
         journey.getJourneys().forEach(j ->
@@ -141,6 +152,7 @@ public class ContractNetAchat extends ContractNetInitiator {
                             list.add(j);
                             return list;
                         }));
+        // 对真正要购买的卖家，把默认的“拒绝”改成“接受”，并附上要买的行程列表
         voyagesAAcheter.forEach((agence, journeys) -> {
             var msg = reponses.get(agence);
             msg.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
@@ -157,6 +169,7 @@ public class ContractNetAchat extends ContractNetInitiator {
      *
      * @param inform message recu
      */
+    // 【handleInform 方法】收到卖家“成交确认”消息时被调用
     @Override
     protected void handleInform(ACLMessage inform) {
         window.println("Agent " + inform.getSender().getLocalName() + " : " + inform.getContent());

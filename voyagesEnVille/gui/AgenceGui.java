@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 /**
  * Agence Gui, communication with AgenceAgent throw GuiEvent
  *
+ * 【旅行社 GUI】显示本旅行社的行程目录，用户可观察收到的招标和成交情况。
+ *
+ * 与 TravellerGui 的区别：本类不发起招标，只是**展示** AgenceAgent 的状态。
+ *
  * @author Emmanuel Adam - LAMIH
  */
 public class AgenceGui extends JFrame {

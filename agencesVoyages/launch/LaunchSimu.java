@@ -14,6 +14,10 @@ import java.util.logging.Logger;
 /**
  * launch the simulation of travelers and travel agencies
  *
+ * 【启动器】旅行社综合案例（与 voyagesEnVille 同源）：
+ *   1 旅客（client1）+ 3 旅行社（汽车/公交/火车）+ 1 警报智能体
+ *   必须加载 TopicManagementService 才能使用广播警报
+ *
  * @author emmanueladam
  */
 public class LaunchSimu {

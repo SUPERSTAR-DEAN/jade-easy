@@ -13,6 +13,13 @@ import java.awt.*;
 /**
  * Journey searcher
  *
+ * 【警报智能体（综合案例版）】对应 [voyagesEnVille/agents/AlertAgent](../../voyagesEnVille/agents/AlertAgent.java)。
+ *
+ * 职责：
+ *   - 创建"TRAFFIC NEWS"广播 topic
+ *   - 用户在窗口输入"起点-终点"后，广播一条警报
+ *   - 所有订阅该 topic 的智能体（旅行社、旅客）都会收到
+ *
  * @author Emmanuel ADAM
  */
 @SuppressWarnings("serial")

@@ -11,6 +11,10 @@ import java.awt.event.WindowEvent;
 /**
  * Journey resarch Gui, communication with TravellerAgent throw GuiEvent
  *
+ * 【旅客 GUI（综合案例版）】让用户选择起点/终点/出发时间/偏好标准，
+ * 点击按钮后通过 GuiEvent 通知 TravellerAgent 发起招标。
+ * 对应 [voyagesEnVille/gui/TravellerGui](../../voyagesEnVille/gui/TravellerGui.java)。
+ *
  * @author modif. Emmanuel Adam - LAMIH
  */
 @SuppressWarnings("serial")

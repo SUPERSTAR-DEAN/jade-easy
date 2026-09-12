@@ -8,6 +8,12 @@ import java.util.Objects;
  * departure and arrival point, departure and arrival date, duration, means
  * (car, bus, ..), cost, co2, confort, provider
  *
+ * 【行程类】一段行程：起点→终点，含出发/到达时间、时长、交通方式、成本、CO2、舒适度、提供商。
+ * 实现 Serializable + Cloneable + Comparable：
+ *   - Serializable：通过 ACL 消息序列化传输
+ *   - Cloneable：方便复制行程（用于组合行程）
+ *   - Comparable：按某个标准排序（成本/时间/CO2）
+ *
  * @author emmanueladam
  */
 @SuppressWarnings("serial")

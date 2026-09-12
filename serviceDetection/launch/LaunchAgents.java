@@ -7,6 +7,7 @@ import jade.util.ExtendedProperties;
 
 import java.util.Properties;
 
+/** 【启动器】服务检测：1 scribe（观察者）+ 9 incoming（陆续注册者，sim1~9） */
 public class LaunchAgents {
     public static void main(String[] args) {
         // prepare arguments for the Jade container

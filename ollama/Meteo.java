@@ -13,6 +13,11 @@ import org.json.JSONObject;
 
 /**
  * Service météo utilisant l'API OpenWeatherMap
+ *
+ * 【天气服务类】调用 OpenWeatherMap API 查询城市天气。
+ * 被 [AgentMeteo](AgentMeteo.java) 使用——把数值温度转成自然语言描述。
+ *
+ * 注意：需要 OpenWeatherMap 的 API key 才能真正工作。
  * Fournit des méthodes pour récupérer et analyser les données météo
  * avec une gestion robuste des erreurs et des entrées utilisateur.
  *

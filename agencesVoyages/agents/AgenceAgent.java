@@ -25,6 +25,14 @@ import java.util.logging.Level;
 /**
  * Journey Seller
  *
+ * 【旅行社智能体（综合案例版）】提供行程销售服务，对应 [voyagesEnVille/agents/AgenceAgent](../../voyagesEnVille/agents/AgenceAgent.java)。
+ *
+ * 职责：
+ *   - 从 CSV 文件加载行程目录（bus.csv / car.csv / train.csv）
+ *   - 注册为 travel/coffee 等服务
+ *   - 用 ContractNetVente 行为响应旅客招标
+ *   - 订阅警报 topic，收到路段警报时从目录里移除受影响行程
+ *
  * @author Emmanuel ADAM
  */
 @SuppressWarnings("serial")

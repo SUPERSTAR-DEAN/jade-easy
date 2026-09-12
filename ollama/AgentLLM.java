@@ -16,11 +16,39 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
 
+/**
+ * 【LLM 智能体】把 JADE 智能体与本地 LLM（通过 Ollama）结合的示例。
+ *
+ * 这是本仓库**最前沿**的模块，演示"AI Agent"的雏形：
+ *   - 智能体作为外壳，负责消息收发、状态管理
+ *   - LLM 作为"大脑"，负责自然语言推理
+ *
+ * 工作流：
+ *   1. setup 时连接本地 Ollama（http://localhost:11434），列出可用模型
+ *   2. 用户在窗口输入问题 → onGuiEvent 触发 sample3()
+ *   3. sample3() 先向 meteoAgent 询问天气，再带着天气信息和对话历史调用 LLM
+ *   4. LLM 返回的菜谱建议显示在窗口
+ *
+ * 关键 API：
+ *   - `listModels()`：GET /api/tags，列出本机所有 LLM 模型
+ *   - `generateResponse(model, prompt)`：POST /api/generate，单轮生成
+ *   - `chatWithHistory(model, system, user, history)`：POST /api/chat，带历史的多轮对话
+ *   - `simpleChat(model, system, user)`：简化版多轮对话（无历史）
+ *
+ * **前置条件**：本机要装 Ollama 并拉取至少一个模型（如 `ollama pull llama3`）
+ *
+ * @author emmanueladam
+ */
 public class AgentLLM  extends GuiAgent {
+    // 【HTTP 客户端】用于调用 Ollama REST API
     private HttpClient httpClient;
+    // 【Ollama 服务地址】默认本机 11434 端口
     private  String baseUrl;
+    // 【当前选用的模型名】从 listModels() 返回的列表里挑一个
     String modelName;
+    // 【GUI 窗口】
     GuiOllamaAgent window;
+    // 【当前天气】会通过消息向 meteoAgent 询问并更新
     String laMeteo = "tempere, 18°C";
 
     /**
@@ -67,6 +95,8 @@ public class AgentLLM  extends GuiAgent {
     }
     /**
      * Méthode pour lister les modèles LLM disponibles sur la machine par l'API Ollama
+     *
+     * 【列出本机所有 LLM 模型】GET /api/tags
      */
     public String[] listModels() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -94,7 +124,9 @@ public class AgentLLM  extends GuiAgent {
      * Méthode pour générer une réponse simple (non chat) avec un modèle donné
      * @param model  le nom du modèle LLM à utiliser
      * @param prompt le texte d'entrée pour la génération
-     * */
+     * *
+     * 【单轮生成】POST /api/generate，发送 {model, prompt, stream:false}，返回 response 字段
+     */
     public String generateResponse(String model, String prompt) throws Exception {
         // Construction du JSON avec org.json
         JSONObject jsonRequest = new JSONObject();
@@ -128,7 +160,10 @@ public class AgentLLM  extends GuiAgent {
      * @param systemPrompt     le prompt système (instructions pour le modèle)
      * @param userMessage      le message utilisateur actuel
      * @param previousMessages un tableau de messages précédents (alternance personne/assistant)
-     * */
+     * *
+     * 【多轮对话】POST /api/chat，发送 messages 数组（system + 历史 + 当前 user），返回 message.content
+     * 历史数组格式：[user1, assistant1, user2, assistant2, ...]——奇数索引是 user，偶数是 assistant
+     */
     public String chatWithHistory(String model, String systemPrompt,
                                   String userMessage, String[] previousMessages) throws Exception {
 
@@ -201,6 +236,8 @@ public class AgentLLM  extends GuiAgent {
      * @param model        le nom du modèle LLM à utiliser
      * @param systemPrompt le prompt système (instructions pour le modèle)
      * @param userMessage  le message utilisateur actuel
+     *
+     * 【简化版多轮对话】不传历史，相当于"第一次开口"
      */
     public String simpleChat(String model, String systemPrompt, String userMessage) throws Exception {
         return chatWithHistory(model, systemPrompt, userMessage, null);
@@ -285,22 +322,26 @@ public class AgentLLM  extends GuiAgent {
     }
 
     private String demanderMeteo(String ville) {
+        // 【向 meteoAgent 发天气询问】会话 ID = "METEO"，performative = REQUEST
         var content = "meteo in " + ville;
         var msg = new ACLMessage(ACLMessage.REQUEST);
         msg.setConversationId("METEO");
         msg.setContent(content);
         msg.addReceiver("meteoAgent");
         send(msg);
+        // 【等待回复】只接收 METEO 会话的 INFORM
         var modele = MessageTemplate.and(
                 MessageTemplate.MatchConversationId("METEO"),
                 MessageTemplate.MatchPerformative(ACLMessage.INFORM));
         // add a behaviour that wait for an eventual failure msg
+        // 【收到天气回复后更新 laMeteo】
         addBehaviour(new ReceiverBehaviour(this,  -1, modele,false, (a, retour) -> {
             laMeteo = retour.getContent();
             window.println(" -> I received a msg from  " + retour.getSender().getLocalName() + " with content: " + laMeteo, true);
         }
         ));
         // Simule une demande de météo pour une ville donnée
+        // 【返回当前值】注意：这是同步返回，真实天气要等异步回调更新
         return laMeteo;
     }
 
