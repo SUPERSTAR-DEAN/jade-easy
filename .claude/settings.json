@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "Bash(ls -la \"$HOME/.vscode/extensions/\" 2>/dev/null | grep -iE \"java|redhat|vscjava\" | head -20; echo \"---项目内vscode配置---\"; find \"D:/code_JADE/jade-easy\" -maxdepth 2 -name \".vscode\" -type d 2>/dev/null; ls -la \"D:/code_JADE/jade-easy/.vscode/\" 2>/dev/null)",
-      "Read(//c/Users/yang8/.vscode/extensions/**)"
+      "Read(//c/Users/yang8/.vscode/extensions/**)",
+      "Bash(META=\"/c/Users/yang8/AppData/Roaming/Code/User/workspaceStorage/eaece7bfecb0d3f8f5a458b3cd00c236/redhat.java/jdt_ws/.metadata/.log\" && echo \"=== JDT 日志（最后 80 行） ===\" && tail -80 \"$META\" 2>/dev/null || echo \"\\(无 .log 文件\\)\")",
+      "Read(//c/Users/yang8/AppData/Roaming/Code/User/workspaceStorage/eaece7bfecb0d3f8f5a458b3cd00c236/redhat.java/jdt_ws/.metadata/**)",
+      "WebSearch",
+      "WebFetch(domain:github.com)"
     ]
   }
 }

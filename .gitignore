@@ -301,3 +301,6 @@ out/production/jade/serviceDetection/agents/ScribeAgent.class
 out/production/jade/serviceDetection/launch/LaunchAgents.class
 out/production/jade/serviceDetection/readme.md
 out/production/jade/serviceDetection/serviceDetection.png
+
+# Eclipse/JDT 编译输出目录
+bin/

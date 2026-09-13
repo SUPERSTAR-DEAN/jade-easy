@@ -1,0 +1,113 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "helloWorldService",
+      "request": "launch",
+      "mainClass": "helloWorldService.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "serviceDetection",
+      "request": "launch",
+      "mainClass": "serviceDetection.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "fsm-review",
+      "request": "launch",
+      "mainClass": "fsm.review.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-requests",
+      "request": "launch",
+      "mainClass": "protocols.requests.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-bordaCount",
+      "request": "launch",
+      "mainClass": "protocols.bordaCount.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-bordaCount5000",
+      "request": "launch",
+      "mainClass": "protocols.bordaCount5000.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-sealedEnglishAuction",
+      "request": "launch",
+      "mainClass": "protocols.sealedEnglishAuction.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-vickrey",
+      "request": "launch",
+      "mainClass": "protocols.vickrey.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-voteCondorcet",
+      "request": "launch",
+      "mainClass": "protocols.voteCondorcet.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "protocols-voteDoubleBorda",
+      "request": "launch",
+      "mainClass": "protocols.voteDoubleBorda.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "radio",
+      "request": "launch",
+      "mainClass": "radio.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "ticTac",
+      "request": "launch",
+      "mainClass": "ticTac.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "window",
+      "request": "launch",
+      "mainClass": "window.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "pingPong-negociation",
+      "request": "launch",
+      "mainClass": "pingPong.negociation.Main"
+    },
+    {
+      "type": "java",
+      "name": "agencesVoyages",
+      "request": "launch",
+      "mainClass": "agencesVoyages.launch.LaunchSimu"
+    },
+    {
+      "type": "java",
+      "name": "voyagesEnVille",
+      "request": "launch",
+      "mainClass": "voyagesEnVille.launch.LaunchSimu"
+    },
+    {
+      "type": "java",
+      "name": "ollama",
+      "request": "launch",
+      "mainClass": "ollama.launch.LaunchAgents"
+    },
+    {
+      "type": "java",
+      "name": "issia23",
+      "request": "launch",
+      "mainClass": "issia23.launch.LaunchAgents"
+    }
+  ]
+}

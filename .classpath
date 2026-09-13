@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="." excluding=".git/**|.vscode/**|.claude/**|.idea/**|bin/**|external-libraries/**|.gitignore|.project|.classpath"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="external-libraries/JadeUPHF.jar"/>
+	<classpathentry kind="lib" path="external-libraries/json-20250517.jar"/>
+	<classpathentry kind="lib" path="external-libraries/opencsv-3.9-3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
